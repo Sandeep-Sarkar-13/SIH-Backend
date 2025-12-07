@@ -20,7 +20,7 @@ const pesticideSchema = new mongoose.Schema(
     // YES / NO confirmation (e.g. sprayed or not, verified or not)
     confirmation: {
       type: String,
-      enum: ['YES', 'NO'],
+      enum: ['YES', 'NO','REJECT'],
       default: 'NO'
     },
 

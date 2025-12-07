@@ -79,6 +79,8 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+
+
 /**
  * GET Most Recent PENDING pesticide with confirmation YES
  */
@@ -126,6 +128,50 @@ router.patch('/:id/process', async (req, res) => {
       message: 'Process status updated successfully',
       pesticide
     });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+/**
+ * UPDATE confirmation status → REJECT
+ */
+router.patch('/:id/reject', async (req, res) => {
+  try {
+    const pesticide = await Pesticide.findByIdAndUpdate(
+      req.params.id,
+      { confirmation: 'REJECT' },
+      { new: true }
+    );
+
+    if (!pesticide) {
+      return res.status(404).json({ message: 'Pesticide not found' });
+    }
+
+    res.json({
+      message: 'Pesticide rejected successfully',
+      pesticide
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+//pesticide with confirmation NO
+router.get('/latest/no-pending', async (req, res) => {
+  try {
+    const pesticide = await Pesticide.findOne({
+      confirmation: 'NO',
+      process: 'PENDING'
+    })
+      .sort({ createdAt: -1 })
+      .populate('farmer');
+
+    if (!pesticide) {
+      return res.status(404).json({
+        message: 'No pending confirmed pesticide found'
+      });
+    }
+
+    res.json(pesticide);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
