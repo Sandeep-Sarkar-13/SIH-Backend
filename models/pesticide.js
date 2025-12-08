@@ -41,10 +41,10 @@ const pesticideSchema = new mongoose.Schema(
 
     // Grid position on farm map (optional)
     gridRow: {
-      type: Number
+      type: String
     },
     gridColumn: {
-      type: Number
+      type: String
     },
 
     // Quantity of pesticide used (e.g. in litres or kg)
