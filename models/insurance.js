@@ -58,7 +58,7 @@ const insuranceSchema = new mongoose.Schema(
 
     ApproveStatus: {
       type: String,
-      enum: ['Pending', 'Approved', 'Rejected', 'Under Review'],
+      enum: ['Pending', 'Approved', 'Rejected', 'Under Review', 'Not Requested'],
       default: 'Not Requested'
     },
 
