@@ -210,11 +210,6 @@ const insuranceSchema = new mongoose.Schema(
 );
 
 // Optional: ensure requested amount exists if claimRequested = YES
-insuranceSchema.pre('validate', function (next) {
-  if (this.claimRequested === 'YES' && !this.claimAmountRequested) {
-    this.invalidate('claimAmountRequested', 'Claim amount requested is required when claim is YES');
-  }
-  next();
-});
+
 
 module.exports = mongoose.model('Insurance', insuranceSchema);
