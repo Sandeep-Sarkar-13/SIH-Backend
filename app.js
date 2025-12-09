@@ -4,6 +4,7 @@ const authRoutes = require('./routes/userauth');
 const farmerRoutes = require('./routes/usercrud');
 const pesticideRoutes = require('./routes/pesticideRoutes');
 const nutrientsRoutes =require('./routes/nutrientsroute.js');
+const insuranceRoutes = require('./routes/insuranceRoutes');
 
 
 require("dotenv").config();
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(cors());
 app.use('/api/auth', authRoutes);
 app.use('/api/nutrients', nutrientsRoutes);
+app.use('/api/insurance', insuranceRoutes)
 
 app.use('/api/farmers', farmerRoutes);
 app.use('/api/pesticides', pesticideRoutes);
