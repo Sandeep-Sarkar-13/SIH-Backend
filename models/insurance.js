@@ -48,7 +48,7 @@ const insuranceSchema = new mongoose.Schema(
       default: 'acre'
     },
 
-    premiumAmount: {
+    claimAmount: {
       type: Number,
       required: [true, 'Premium amount is required'],
       min: [0, 'Premium amount cannot be negative']
@@ -77,11 +77,8 @@ const insuranceSchema = new mongoose.Schema(
 
     ApproveStatus: {
       type: String,
-      enum: {
-        values: ['Not Requested', 'Pending', 'Approved', 'Rejected', 'Under Review'],
-        message: 'Invalid approve status'
-      },
-      default: 'Not Requested'
+      enum: ['Pending', 'Approved', 'Rejected', 'Under Review'],
+      default: 'Under Review'
     },
 
     claimAmountRequested: {
