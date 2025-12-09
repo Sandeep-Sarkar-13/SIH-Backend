@@ -244,4 +244,27 @@ router.post('/:id/calculate-compensation', async (req, res) => {
   }
 });
 
+
+/**
+ * APPROVE CLAIM
+ * PATCH /api/insurance/:id/approve
+ */
+router.patch('/:id/approve', async (req, res) => {
+  try {
+    const updated = await Insurance.findByIdAndUpdate(
+      req.params.id,
+      { $set: { claimStatus: "Approved", approvedAt: new Date() }}, // automatic timestamp
+      { new: true, runValidators: true }
+    );
+
+    if (!updated)
+      return res.status(404).json({ message: "Policy not found" });
+
+    res.json({ message: "Policy approved successfully", policy: updated });
+  } catch (err) {
+    console.error("Approval error:", err);
+    res.status(500).json({ message: "Error approving policy", error: err.message });
+  }
+});
 module.exports = router;
+
