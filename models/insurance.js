@@ -36,7 +36,7 @@ const insuranceSchema = new mongoose.Schema(
       default: 'acre'
     },
 
-    premiumAmount: {
+    claimAmount: {
       type: Number,
     
     },
